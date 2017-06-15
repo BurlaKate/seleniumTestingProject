@@ -1,34 +1,50 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class MainPageManipulation {
 
-    public static final String LOANS_LABEL = "\n" +
-            "                                                Loans\n" +
-            "                                                ";
 
-    WebDriver driver ;
+    public static final String FR_LANGUAGE = "fr-CA";
+
+    WebDriver driver;
 
     @BeforeTest
-    public void setup(){
+    public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
     @AfterTest
-    public void quit(){
+    public void quit() {
         driver.quit();
     }
 
     @Test
-    public void test() throws InterruptedException {
+    public void shouldChangeLanguage() {
         MainPage mainPage = new MainPage(driver);
-        if(!mainPage.loansDropDownList.getText().equals(LOANS_LABEL))
-        mainPage.languageButtonPress();
-//        Thread.sleep(5000);
+        mainPage.openPageAndChangeLanguage();
+        Assert.assertEquals(mainPage.getLanguageToSwitchTo(), FR_LANGUAGE);
 
     }
+
+    @Test
+    public void shouldChooseRightItemInLoansList() {
+        MainPage mainPage = new MainPage(driver);
+        mainPage.openPageAndChangeLanguage();
+        mainPage.selectProduct("/mortgage");
+        Assert.assertTrue(driver.getCurrentUrl().contains("/mortgage"), "Wrong screen!");
+
+    }
+
+    @Test
+    public void shouldPressButtonOnMortgageScreen() throws InterruptedException {
+        MortgagePage mortgagePage = new MortgagePage(driver);
+        mortgagePage.open("/mortgage");
+        mortgagePage.calculatePaymentButtonPress();
+    }
+
 }
