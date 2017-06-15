@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-public class MainPage {
+public class MainScreen {
 
     public static final String EN_LANGUAGE = "en";
 
@@ -21,7 +21,7 @@ public class MainPage {
     @FindBy(css = "section[aria-labelledby='Produits']")
     private WebElement dropDownList;
 
-    public MainPage(WebDriver driver) {
+    public MainScreen(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -30,12 +30,12 @@ public class MainPage {
         return this.languageButton.getAttribute("lang");
     }
 
-    public MainPage languageButtonPress() {
+    public MainScreen languageButtonPress() {
         this.languageButton.click();
         return this;
     }
 
-    public MainPage openPageAndChangeLanguage() {
+    public MainScreen openPageAndChangeLanguage() {
         driver.get("http://ia.ca");
         if (getLanguageToSwitchTo().equals(EN_LANGUAGE)) {
             languageButtonPress();
@@ -43,7 +43,7 @@ public class MainPage {
         return this;
     }
 
-    public MainPage openLoansListIfNotOpened() {
+    public MainScreen openLoansListIfNotOpened() {
         if (!dropDownList.isDisplayed()) {
             loansButton.click();
             (new WebDriverWait(driver, 5))
@@ -53,10 +53,10 @@ public class MainPage {
         return this;
     }
 
-    public MortgagePage selectProduct(String productHref) {
+    public MortgageScreen selectProduct(String productHref) {
         this.openLoansListIfNotOpened();
         this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[href='" + productHref + "']")).click();
-        return new MortgagePage(driver);
+        return new MortgageScreen(driver);
     }
 
 

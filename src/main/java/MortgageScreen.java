@@ -4,30 +4,31 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MortgagePage {
+public class MortgageScreen {
 
     WebDriver driver;
+
     @FindBy(css = "div#main div div div div a[href='/mortgage-payment-calculator']")
     private WebElement calculatePaymentsButton;
 
-    public MortgagePage(WebDriver driver) {
+    public MortgageScreen(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
     }
 
-    public MortgagePage calculatePaymentButtonPress() {
+    public PaymentCalculatorScreen calculatePaymentButtonPress() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView(true);", calculatePaymentsButton);
         this.calculatePaymentsButton.click();
-        return this;
+        return new PaymentCalculatorScreen(driver);
     }
 
-    public MortgagePage open(String productHref) {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.openPageAndChangeLanguage();
-        mainPage.openLoansListIfNotOpened();
-        mainPage.selectProduct(productHref);
+    public MortgageScreen open(String productHref) {
+        MainScreen mainScreen = new MainScreen(driver);
+        mainScreen.openPageAndChangeLanguage();
+        mainScreen.openLoansListIfNotOpened();
+        mainScreen.selectProduct(productHref);
         return this;
     }
 }
