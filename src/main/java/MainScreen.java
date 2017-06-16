@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class MainScreen {
 
-    public static final String EN_LANGUAGE = "en";
+    private static final String EN_LANGUAGE = "en";
 
     WebDriver driver;
 
@@ -21,7 +21,7 @@ public class MainScreen {
     @FindBy(css = "section[aria-labelledby='Produits']")
     private WebElement dropDownList;
 
-    public MainScreen(WebDriver driver) {
+    MainScreen(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

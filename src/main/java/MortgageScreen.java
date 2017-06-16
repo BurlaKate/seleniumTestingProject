@@ -8,10 +8,10 @@ public class MortgageScreen {
 
     WebDriver driver;
 
-    @FindBy(css = "div#main div div div div a[href='/mortgage-payment-calculator']")
+    @FindBy(css = ".icone-calculateur a[href='/mortgage-payment-calculator']")
     private WebElement calculatePaymentsButton;
 
-    public MortgageScreen(WebDriver driver) {
+    MortgageScreen(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
 
