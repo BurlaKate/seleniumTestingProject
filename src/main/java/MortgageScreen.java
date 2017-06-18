@@ -9,7 +9,6 @@ public class MortgageScreen {
     WebDriver driver;
 
     @FindBy(css = ".icone-calculateur a[data-utag-name='calculate_your_payments']")
-//    @FindBy(css = ".icone-calculateur a[href='/mortgage-payment-calculator']")
     private WebElement calculatePaymentsButton;
 
     MortgageScreen(WebDriver driver) {

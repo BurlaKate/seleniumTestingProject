@@ -29,8 +29,8 @@ public class MortgagePaymentManipulation {
     }
 
     @AfterTest
-    public void quit() {
-        driver.quit();
+    public void close() {
+        driver.close();
     }
 
     @Test
@@ -110,6 +110,7 @@ public class MortgagePaymentManipulation {
         Assert.assertEquals(paymentScreen.getValueFromAmortizationList(), EXPECTED_AMORTIZATION_VALUE,
                 "Amortization Value is wrong!");
     }
+
     @Test
     public void shouldSelectPaymentFrequencyByValue() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
@@ -120,9 +121,8 @@ public class MortgagePaymentManipulation {
                 "Payment Frequency Value is wrong!");
     }
 
-
     @Test
-    public void shouldMakeAllSteps() throws InterruptedException {
+    public void shouldMakeAllSteps() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
         paymentScreen.scrollTo("300");
@@ -140,5 +140,4 @@ public class MortgagePaymentManipulation {
         Assert.assertEquals(paymentScreen.getValueFromPaymentResults(), EXPECTED_PAYMENT_RESULT,
                 "Expected payment is wrong!");
     }
-
 }

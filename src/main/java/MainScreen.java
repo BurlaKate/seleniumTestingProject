@@ -16,7 +16,6 @@ public class MainScreen {
     private WebElement languageButton;
 
     @FindBy(css = "a[data-utag-name='loans']")
-//    @FindBy(css = "a[href='/mortgage']")
     private WebElement loansButton;
 
     @FindBy(css = "section[aria-labelledby='Produits']")
@@ -40,6 +39,7 @@ public class MainScreen {
         driver.get("http://ia.ca");
         if (getLanguageToSwitchTo().equals(EN_LANGUAGE)) {
             languageButtonPress();
+//            Assert.assertTrue(getLanguageToSwitchTo().equals("fr-CA"));
         }
         return this;
     }
@@ -57,9 +57,6 @@ public class MainScreen {
     public MortgageScreen selectProduct(String productHref) {
         this.openLoansListIfNotOpened();
         this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[data-utag-name='" + productHref + "']")).click();
-//        this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[href='" + productHref + "']")).click();
         return new MortgageScreen(driver);
     }
-
-
 }

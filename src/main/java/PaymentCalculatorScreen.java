@@ -131,10 +131,6 @@ public class PaymentCalculatorScreen {
         return this;
     }
 
-//    public Number getValueFromPaymentResults(){
-//        return Double.parseDouble(this.paymentResultsLabel.getText().substring(0, 1));
-//    }
-
     public String getValueFromPaymentResults(){
         (new WebDriverWait(driver, 10))
                 .until((WebDriver driver) -> this.paymentResultsLabel.isDisplayed());
