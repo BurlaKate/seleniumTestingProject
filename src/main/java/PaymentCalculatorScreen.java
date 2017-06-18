@@ -5,7 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class PaymentCalculatorScreen {
 
@@ -13,8 +14,6 @@ public class PaymentCalculatorScreen {
     private static final int PURCHASE_SLIDER_Y_OFFSET = 0;
     private static final String DATA_VALUE_ATTRIBUTE = "data-value";
     private static final String VALUE_ATTRIBUTE = "value";
-
-    private static final String AMORTIZATION_VALUE = "15";
 
     WebDriver driver;
 
@@ -45,6 +44,20 @@ public class PaymentCalculatorScreen {
     @FindBy(css = "label[for='Amortissement'] + .selectric-wrapper>.selectric")
     private WebElement amortizationSelect;
 
+    @FindBy(css = "label[for='Amortissement'] + .selectric-wrapper>.selectric-items>div>ul>li:nth-child(1)")
+    private WebElement amortizationValueFifteen;
+
+    @FindBy(css = "label[for='Amortissement'] + .selectric-wrapper>.selectric>p.label")
+    private WebElement amortizationLabel;
+
+    @FindBy(css = "label[for='FrequenceVersement'] + .selectric-wrapper>.selectric")
+    private WebElement paymentFrequencySelect;
+
+    @FindBy(css = "label[for='FrequenceVersement'] + .selectric-wrapper>.selectric>p.label")
+    private WebElement paymentFrequencyLabel;
+
+    @FindBy(css = "label[for='FrequenceVersement'] + .selectric-wrapper>.selectric-items>div>ul>li:nth-child(4)")
+    private WebElement paymentFrequencyWeeklyValue;
 
     PaymentCalculatorScreen(WebDriver driver) {
         this.driver = driver;
@@ -123,17 +136,33 @@ public class PaymentCalculatorScreen {
 //    }
 
     public String getValueFromPaymentResults(){
+        (new WebDriverWait(driver, 10))
+                .until((WebDriver driver) -> this.paymentResultsLabel.isDisplayed());
+        Assert.assertTrue(this.paymentResultsLabel.isDisplayed());
         return this.paymentResultsLabel.getText();
     }
 
-
-
-    public PaymentCalculatorScreen selectAmortizationByValue(){
-        amortizationSelect.click();
-        Select amortSelect = new Select(amortizationSelect);
-        amortSelect.selectByValue(AMORTIZATION_VALUE);
+    public PaymentCalculatorScreen selectAmortizationValue(){
+        this.amortizationSelect.click();
+        if(amortizationSelect.isDisplayed()){
+            this.amortizationValueFifteen.click();
+        }
         return this;
     }
 
+    public String getValueFromAmortizationList(){
+        return this.amortizationLabel.getText();
+    }
 
+    public PaymentCalculatorScreen selectPaymentFrequencyValue(){
+        this.paymentFrequencySelect.click();
+        if(paymentFrequencySelect.isDisplayed()){
+            this.paymentFrequencyWeeklyValue.click();
+        }
+        return this;
+    }
+
+    public String getValueFromPaymentFrequencyList(){
+        return this.paymentFrequencyLabel.getText();
+    }
 }

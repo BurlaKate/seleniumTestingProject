@@ -5,17 +5,19 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
 public class MortgagePaymentManipulation {
 
     private static final String FR_LANGUAGE = "fr-CA";
-    private static final String LOANS_LIST_ITEM = "/mortgage";
+    private static final String LOANS_LIST_ITEM = "mortgage_loan";
+    private static final String MORTGAGE_SCREEN = "/mortgage";
+    private static final String PAYMENT_CALCULATION_SCREEN = "/mortgage-payment-calculator";
     private static final int EXPECTED_PURCHASE_PRICE = 500000;
     private static final int EXPECTED_DOWN_PRICE = 100000;
     private static final String INTEREST_VALUE = "5";
     private static final String EXPECTED_INTEREST_VALUE = "5";
-    private static final String EXPECTED_PAYMENT_RESULT = "726.35";
+    private static final String EXPECTED_AMORTIZATION_VALUE = "15 years";
+    private static final String EXPECTED_PAYMENT_FREQUENCY_VALUE = "weekly";
+    private static final String EXPECTED_PAYMENT_RESULT = "$ 726.35";
 
 
     WebDriver driver;
@@ -24,7 +26,6 @@ public class MortgagePaymentManipulation {
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
     }
 
     @AfterTest
@@ -44,7 +45,7 @@ public class MortgagePaymentManipulation {
         MainScreen mainScreen = new MainScreen(driver);
         mainScreen.openPageAndChangeLanguage();
         mainScreen.selectProduct(LOANS_LIST_ITEM);
-        Assert.assertTrue(driver.getCurrentUrl().contains(LOANS_LIST_ITEM), "Not mortgage screen!");
+        Assert.assertTrue(driver.getCurrentUrl().contains(MORTGAGE_SCREEN), "Not mortgage screen!");
     }
 
 
@@ -53,7 +54,7 @@ public class MortgagePaymentManipulation {
         MortgageScreen mortgageScreen = new MortgageScreen(driver);
         mortgageScreen.open(LOANS_LIST_ITEM);
         mortgageScreen.calculatePaymentButtonPress();
-        Assert.assertTrue(driver.getCurrentUrl().contains("/mortgage-payment-calculator"),
+        Assert.assertTrue(driver.getCurrentUrl().contains(PAYMENT_CALCULATION_SCREEN),
                 "Not payment calculator screen!");
     }
 
@@ -101,16 +102,24 @@ public class MortgagePaymentManipulation {
     }
 
     @Test
-    public void shouldSelectAmortizationByValue() throws InterruptedException {
+    public void shouldSelectAmortizationByValue() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
         paymentScreen.scrollTo("750");
-        paymentScreen.selectAmortizationByValue();
-        Thread.sleep(5000);
-//        Assert.assertEquals(paymentScreen.getValueFromInterestRateInput(), EXPECTED_INTEREST_VALUE,
-//                "Interest Value is wrong!");
-
+        paymentScreen.selectAmortizationValue();
+        Assert.assertEquals(paymentScreen.getValueFromAmortizationList(), EXPECTED_AMORTIZATION_VALUE,
+                "Amortization Value is wrong!");
     }
+    @Test
+    public void shouldSelectPaymentFrequencyByValue() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.scrollTo("900");
+        paymentScreen.selectPaymentFrequencyValue();
+        Assert.assertEquals(paymentScreen.getValueFromPaymentFrequencyList(), EXPECTED_PAYMENT_FREQUENCY_VALUE,
+                "Payment Frequency Value is wrong!");
+    }
+
 
     @Test
     public void shouldMakeAllSteps() throws InterruptedException {
@@ -122,9 +131,11 @@ public class MortgagePaymentManipulation {
         paymentScreen.moveDownSliverUsingPlusButton();
         paymentScreen.scrollTo("200");
         paymentScreen.enterValueIntoInterestRateInput(INTEREST_VALUE);
+        paymentScreen.scrollTo("400");
+        paymentScreen.selectAmortizationValue();
+        paymentScreen.selectPaymentFrequencyValue();
         paymentScreen.pressCalculateButton();
-        paymentScreen.scrollTo("-300");
-        Thread.sleep(5000);
+        paymentScreen.scrollTo("-600");
         paymentScreen.getValueFromPaymentResults();
         Assert.assertEquals(paymentScreen.getValueFromPaymentResults(), EXPECTED_PAYMENT_RESULT,
                 "Expected payment is wrong!");

@@ -15,7 +15,8 @@ public class MainScreen {
     @FindBy(id = "topLangMenuItem")
     private WebElement languageButton;
 
-    @FindBy(css = "a[href='/mortgage']")
+    @FindBy(css = "a[data-utag-name='loans']")
+//    @FindBy(css = "a[href='/mortgage']")
     private WebElement loansButton;
 
     @FindBy(css = "section[aria-labelledby='Produits']")
@@ -46,7 +47,7 @@ public class MainScreen {
     public MainScreen openLoansListIfNotOpened() {
         if (!dropDownList.isDisplayed()) {
             loansButton.click();
-            (new WebDriverWait(driver, 5))
+            (new WebDriverWait(driver, 10))
                     .until((WebDriver driver) -> this.dropDownList.isDisplayed());
         }
         Assert.assertTrue(this.dropDownList.isDisplayed());
@@ -55,7 +56,8 @@ public class MainScreen {
 
     public MortgageScreen selectProduct(String productHref) {
         this.openLoansListIfNotOpened();
-        this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[href='" + productHref + "']")).click();
+        this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[data-utag-name='" + productHref + "']")).click();
+//        this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[href='" + productHref + "']")).click();
         return new MortgageScreen(driver);
     }
 
