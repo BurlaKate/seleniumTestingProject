@@ -15,7 +15,7 @@ public class PaymentCalculatorScreen {
     private static final String DATA_VALUE_ATTRIBUTE = "data-value";
     private static final String VALUE_ATTRIBUTE = "value";
 
-    private static WebDriver driver;
+    WebDriver driver;
 
     @FindBy(id = "sliderPrixPropriete")
     private WebElement sliderPrixValue;
@@ -75,7 +75,7 @@ public class PaymentCalculatorScreen {
     }
 
     public int getLocationOfPurchaseSlider() {
-        Point point = this.purchasePriceSlider.getLocation();
+        Point point = purchasePriceSlider.getLocation();
         int xcord = point.getX();
         return xcord;
     }
@@ -97,68 +97,68 @@ public class PaymentCalculatorScreen {
     }
 
     public int getValueOfPurchasePrice() {
-        return Integer.parseInt(this.sliderPrixValue.getAttribute(DATA_VALUE_ATTRIBUTE));
+        return Integer.parseInt(sliderPrixValue.getAttribute(DATA_VALUE_ATTRIBUTE));
     }
 
     public int getValueOfDownPrice() {
-        return Integer.parseInt(this.sliderMiseValue.getAttribute(DATA_VALUE_ATTRIBUTE));
+        return Integer.parseInt(sliderMiseValue.getAttribute(DATA_VALUE_ATTRIBUTE));
     }
 
     public PaymentCalculatorScreen movePurchaseSliverUsingPlusButton() {
         for (int i = getValueOfPurchasePrice(); i < 500000; i += 250000)
-            this.purchasePricePlusButton.click();
+            purchasePricePlusButton.click();
         return this;
     }
 
     public PaymentCalculatorScreen moveDownSliverUsingPlusButton() {
         for (int i = getValueOfDownPrice(); i < 100000; i += 100000)
-            this.downPricePlusButton.click();
+            downPricePlusButton.click();
         return this;
     }
 
     public String getValueFromInterestRateInput() {
-        return this.interestRateInput.getAttribute(VALUE_ATTRIBUTE);
+        return interestRateInput.getAttribute(VALUE_ATTRIBUTE);
     }
 
     public PaymentCalculatorScreen enterValueIntoInterestRateInput(String interestValue) {
-        this.interestRateInput.clear();
-        this.interestRateInput.sendKeys(interestValue);
+        interestRateInput.clear();
+        interestRateInput.sendKeys(interestValue);
         return this;
     }
 
     public PaymentCalculatorScreen pressCalculateButton() {
-        this.calculateButton.click();
+        calculateButton.click();
         return this;
     }
 
-    public String getValueFromPaymentResults(){
+    public String getValueFromPaymentResults() {
         (new WebDriverWait(driver, 10))
-                .until((WebDriver driver) -> this.paymentResultsLabel.isDisplayed());
-        Assert.assertTrue(this.paymentResultsLabel.isDisplayed());
-        return this.paymentResultsLabel.getText();
+                .until((WebDriver driver) -> paymentResultsLabel.isDisplayed());
+        Assert.assertTrue(paymentResultsLabel.isDisplayed());
+        return paymentResultsLabel.getText();
     }
 
-    public PaymentCalculatorScreen selectAmortizationValue(){
-        this.amortizationSelect.click();
-        if(amortizationSelect.isDisplayed()){
-            this.amortizationValueFifteen.click();
+    public PaymentCalculatorScreen selectAmortizationValue() {
+        amortizationSelect.click();
+        if (amortizationSelect.isDisplayed()) {
+            amortizationValueFifteen.click();
         }
         return this;
     }
 
-    public String getValueFromAmortizationList(){
-        return this.amortizationLabel.getText();
+    public String getValueFromAmortizationList() {
+        return amortizationLabel.getText();
     }
 
-    public PaymentCalculatorScreen selectPaymentFrequencyValue(){
-        this.paymentFrequencySelect.click();
-        if(paymentFrequencySelect.isDisplayed()){
-            this.paymentFrequencyWeeklyValue.click();
+    public PaymentCalculatorScreen selectPaymentFrequencyValue() {
+        paymentFrequencySelect.click();
+        if (paymentFrequencySelect.isDisplayed()) {
+            paymentFrequencyWeeklyValue.click();
         }
         return this;
     }
 
-    public String getValueFromPaymentFrequencyList(){
-        return this.paymentFrequencyLabel.getText();
+    public String getValueFromPaymentFrequencyList() {
+        return paymentFrequencyLabel.getText();
     }
 }

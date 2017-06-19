@@ -4,13 +4,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 public class MainScreen {
 
     private static final String EN_LANGUAGE = "en";
 
-    private static WebDriver driver;
+    WebDriver driver;
 
     @FindBy(id = "topLangMenuItem")
     private WebElement languageButton;
@@ -28,7 +27,7 @@ public class MainScreen {
 
     public String getLanguageToSwitchTo() throws StaleElementReferenceException {
         try {
-            return this.languageButton.getAttribute("lang");
+            return languageButton.getAttribute("lang");
         } catch (StaleElementReferenceException e) {
             return driver.findElement(By.id("topLangMenuItem")).getAttribute("lang");
         }
@@ -36,7 +35,7 @@ public class MainScreen {
 
     public MainScreen languageButtonPress() {
         try {
-            this.languageButton.click();
+            languageButton.click();
         } catch (StaleElementReferenceException e) {
             driver.findElement(By.id("topLangMenuItem")).click();
         }
@@ -55,13 +54,12 @@ public class MainScreen {
         if (!dropDownList.isDisplayed()) {
             loansButton.click();
         }
-        Assert.assertTrue(this.dropDownList.isDisplayed());
         return this;
     }
 
     public MortgageScreen selectProduct(String productHref) {
-        this.openLoansListIfNotOpened();
-        this.driver.findElement(By.cssSelector("ul.mega-menu-content li a[data-utag-name='" + productHref + "']")).click();
+        openLoansListIfNotOpened();
+        driver.findElement(By.cssSelector("ul.mega-menu-content li a[data-utag-name='" + productHref + "']")).click();
         return new MortgageScreen(driver);
     }
 }

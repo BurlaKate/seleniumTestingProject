@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MortgageScreen {
 
-    private static WebDriver driver;
+    WebDriver driver;
 
     @FindBy(css = ".icone-calculateur a[data-utag-name='calculate_your_payments']")
     private WebElement calculatePaymentsButton;
@@ -19,7 +19,7 @@ public class MortgageScreen {
     public PaymentCalculatorScreen calculatePaymentButtonPress() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView(true);", calculatePaymentsButton);
-        this.calculatePaymentsButton.click();
+        calculatePaymentsButton.click();
         return new PaymentCalculatorScreen(driver);
     }
 
