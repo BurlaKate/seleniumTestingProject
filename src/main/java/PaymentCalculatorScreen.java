@@ -15,7 +15,7 @@ public class PaymentCalculatorScreen {
     private static final String DATA_VALUE_ATTRIBUTE = "data-value";
     private static final String VALUE_ATTRIBUTE = "value";
 
-    WebDriver driver;
+    private static WebDriver driver;
 
     @FindBy(id = "sliderPrixPropriete")
     private WebElement sliderPrixValue;

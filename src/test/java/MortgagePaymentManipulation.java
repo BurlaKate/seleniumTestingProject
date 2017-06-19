@@ -1,8 +1,8 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class MortgagePaymentManipulation {
@@ -19,37 +19,36 @@ public class MortgagePaymentManipulation {
     private static final String EXPECTED_PAYMENT_FREQUENCY_VALUE = "weekly";
     private static final String EXPECTED_PAYMENT_RESULT = "$ 726.35";
 
+    private static WebDriver driver;
 
-    WebDriver driver;
-
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
     }
 
-    @AfterTest
-    public void close() {
+    @AfterMethod
+    public void quit() {
         driver.close();
+        driver.quit();
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldChangeLanguage() {
         MainScreen mainScreen = new MainScreen(driver);
         mainScreen.openPageAndChangeLanguage();
         Assert.assertEquals(mainScreen.getLanguageToSwitchTo(), FR_LANGUAGE);
     }
 
-    @Test
-    public void shouldChooseRightItemInLoansList() {
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldChooseRightItemInLoansList() throws InterruptedException {
         MainScreen mainScreen = new MainScreen(driver);
         mainScreen.openPageAndChangeLanguage();
         mainScreen.selectProduct(LOANS_LIST_ITEM);
         Assert.assertTrue(driver.getCurrentUrl().contains(MORTGAGE_SCREEN), "Not mortgage screen!");
     }
 
-
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldPressButtonOnMortgageScreen() {
         MortgageScreen mortgageScreen = new MortgageScreen(driver);
         mortgageScreen.open(LOANS_LIST_ITEM);
@@ -58,7 +57,7 @@ public class MortgagePaymentManipulation {
                 "Not payment calculator screen!");
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldMovePurchaseSliderToTheRight() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
@@ -70,7 +69,7 @@ public class MortgagePaymentManipulation {
                 "Purchase Price Slider movement doesn't work!");
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldChangePurchasePriceUsingButton() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
@@ -80,7 +79,7 @@ public class MortgagePaymentManipulation {
                 "Purchase Price Value is wrong!");
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldChangeDownPriceUsingButton() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
@@ -90,7 +89,7 @@ public class MortgagePaymentManipulation {
                 "Down Price Value is wrong!");
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldEnterValueIntoInterestRateInput() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
@@ -98,10 +97,9 @@ public class MortgagePaymentManipulation {
         paymentScreen.enterValueIntoInterestRateInput(INTEREST_VALUE);
         Assert.assertEquals(paymentScreen.getValueFromInterestRateInput(), EXPECTED_INTEREST_VALUE,
                 "Interest Value is wrong!");
-
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldSelectAmortizationByValue() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
@@ -111,7 +109,7 @@ public class MortgagePaymentManipulation {
                 "Amortization Value is wrong!");
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldSelectPaymentFrequencyByValue() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);
@@ -121,7 +119,7 @@ public class MortgagePaymentManipulation {
                 "Payment Frequency Value is wrong!");
     }
 
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldMakeAllSteps() {
         PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
         paymentScreen.open(LOANS_LIST_ITEM);

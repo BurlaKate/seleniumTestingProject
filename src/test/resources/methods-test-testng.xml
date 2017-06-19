@@ -1,0 +1,7 @@
+<suite name="Test-method Suite" >
+    <test name="Test-method test">
+        <classes>
+            <class name="MortgagePaymentManipulation" />
+        </classes>
+    </test>
+</suite>

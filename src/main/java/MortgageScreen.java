@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MortgageScreen {
 
-    WebDriver driver;
+    private static WebDriver driver;
 
     @FindBy(css = ".icone-calculateur a[data-utag-name='calculate_your_payments']")
     private WebElement calculatePaymentsButton;
