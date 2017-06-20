@@ -10,7 +10,6 @@
 
     <properties>
         <aspectj.version>1.7.4</aspectj.version>
-        <!--<allure.version>{latest-allure-version}</allure.version>-->
     </properties>
 
     <dependencies>
@@ -109,7 +108,7 @@
                     <properties>
                         <allure.issues.tracker.pattern>http://example.com/%s</allure.issues.tracker.pattern>
                     </properties>
-                    <reportDirectory>allure-report</reportDirectory>
+                    <!--<reportDirectory>allure-report</reportDirectory>-->
                     <resultsDirectory>allure-results</resultsDirectory>
                 </configuration>
             </plugin>

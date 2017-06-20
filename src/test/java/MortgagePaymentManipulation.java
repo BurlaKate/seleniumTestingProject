@@ -33,16 +33,14 @@ public class MortgagePaymentManipulation {
         driver.quit();
     }
 
-//    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldChangeLanguage() {
         MainScreen mainScreen = new MainScreen(driver);
         mainScreen.openPageAndChangeLanguage();
         Assert.assertEquals(mainScreen.getLanguageToSwitchTo(), FR_LANGUAGE);
     }
 
-    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-    @Test
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
     public void shouldChooseRightItemInLoansList() {
         MainScreen mainScreen = new MainScreen(driver);
         mainScreen.openPageAndChangeLanguage();
@@ -50,102 +48,94 @@ public class MortgagePaymentManipulation {
         Assert.assertTrue(driver.getCurrentUrl().contains(MORTGAGE_SCREEN), "Not mortgage screen!");
     }
 
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldPressButtonOnMortgageScreen() {
-//        MortgageScreen mortgageScreen = new MortgageScreen(driver);
-//        mortgageScreen.open(LOANS_LIST_ITEM);
-//        mortgageScreen.calculatePaymentButtonPress();
-//        Assert.assertTrue(driver.getCurrentUrl().contains(PAYMENT_CALCULATION_SCREEN),
-//                "Not payment calculator screen!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldMovePurchaseSliderToTheRight() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        Integer oldLocation = paymentScreen.getLocationOfPurchaseSlider();
-//        paymentScreen.scrollTo("250");
-//        paymentScreen.movePurchaseSliderToTheRight();
-//        Integer newLocation = paymentScreen.getLocationOfPurchaseSlider();
-//        Assert.assertTrue(paymentScreen.checkIfPurchaseSliderWorks(oldLocation, newLocation),
-//                "Purchase Price Slider movement doesn't work!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldChangePurchasePriceUsingButton() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        paymentScreen.movePurchaseSliderToTheRight();
-//        paymentScreen.movePurchaseSliverUsingPlusButton();
-//        Assert.assertEquals(paymentScreen.getValueOfPurchasePrice(), EXPECTED_PURCHASE_PRICE,
-//                "Purchase Price Value is wrong!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldChangeDownPriceUsingButton() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        paymentScreen.scrollTo("500");
-//        paymentScreen.moveDownSliverUsingPlusButton();
-//        Assert.assertEquals(paymentScreen.getValueOfDownPrice(), EXPECTED_DOWN_PRICE,
-//                "Down Price Value is wrong!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldEnterValueIntoInterestRateInput() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        paymentScreen.scrollTo("750");
-//        paymentScreen.enterValueIntoInterestRateInput(INTEREST_VALUE);
-//        Assert.assertEquals(paymentScreen.getValueFromInterestRateInput(), EXPECTED_INTEREST_VALUE,
-//                "Interest Value is wrong!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldSelectAmortizationByValue() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        paymentScreen.scrollTo("750");
-//        paymentScreen.selectAmortizationValue();
-//        Assert.assertEquals(paymentScreen.getValueFromAmortizationList(), EXPECTED_AMORTIZATION_VALUE,
-//                "Amortization Value is wrong!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldSelectPaymentFrequencyByValue() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        paymentScreen.scrollTo("900");
-//        paymentScreen.selectPaymentFrequencyValue();
-//        Assert.assertEquals(paymentScreen.getValueFromPaymentFrequencyList(), EXPECTED_PAYMENT_FREQUENCY_VALUE,
-//                "Payment Frequency Value is wrong!");
-//    }
-//
-//    //    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
-//    @Test
-//    public void shouldMakeAllSteps() {
-//        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
-//        paymentScreen.open(LOANS_LIST_ITEM);
-//        paymentScreen.scrollTo("300");
-//        paymentScreen.movePurchaseSliderToTheRight();
-//        paymentScreen.movePurchaseSliverUsingPlusButton();
-//        paymentScreen.moveDownSliverUsingPlusButton();
-//        paymentScreen.scrollTo("200");
-//        paymentScreen.enterValueIntoInterestRateInput(INTEREST_VALUE);
-//        paymentScreen.scrollTo("400");
-//        paymentScreen.selectAmortizationValue();
-//        paymentScreen.selectPaymentFrequencyValue();
-//        paymentScreen.pressCalculateButton();
-//        paymentScreen.scrollTo("-600");
-//        paymentScreen.getValueFromPaymentResults();
-//        Assert.assertEquals(paymentScreen.getValueFromPaymentResults(), EXPECTED_PAYMENT_RESULT,
-//                "Expected payment is wrong!");
-//    }
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldPressButtonOnMortgageScreen() {
+        MortgageScreen mortgageScreen = new MortgageScreen(driver);
+        mortgageScreen.open(LOANS_LIST_ITEM);
+        mortgageScreen.calculatePaymentButtonPress();
+        Assert.assertTrue(driver.getCurrentUrl().contains(PAYMENT_CALCULATION_SCREEN),
+                "Not payment calculator screen!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldMovePurchaseSliderToTheRight() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        Integer oldLocation = paymentScreen.getLocationOfPurchaseSlider();
+        paymentScreen.scrollTo("250");
+        paymentScreen.movePurchaseSliderToTheRight();
+        Integer newLocation = paymentScreen.getLocationOfPurchaseSlider();
+        Assert.assertTrue(paymentScreen.checkIfPurchaseSliderWorks(oldLocation, newLocation),
+                "Purchase Price Slider movement doesn't work!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldChangePurchasePriceUsingButton() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.movePurchaseSliderToTheRight();
+        paymentScreen.movePurchaseSliverUsingPlusButton();
+        Assert.assertEquals(paymentScreen.getValueOfPurchasePrice(), EXPECTED_PURCHASE_PRICE,
+                "Purchase Price Value is wrong!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldChangeDownPriceUsingButton() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.scrollTo("500");
+        paymentScreen.moveDownSliverUsingPlusButton();
+        Assert.assertEquals(paymentScreen.getValueOfDownPrice(), EXPECTED_DOWN_PRICE,
+                "Down Price Value is wrong!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldEnterValueIntoInterestRateInput() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.scrollTo("750");
+        paymentScreen.enterValueIntoInterestRateInput(INTEREST_VALUE);
+        Assert.assertEquals(paymentScreen.getValueFromInterestRateInput(), EXPECTED_INTEREST_VALUE,
+                "Interest Value is wrong!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldSelectAmortizationByValue() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.scrollTo("750");
+        paymentScreen.selectAmortizationValue();
+        Assert.assertEquals(paymentScreen.getValueFromAmortizationList(), EXPECTED_AMORTIZATION_VALUE,
+                "Amortization Value is wrong!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldSelectPaymentFrequencyByValue() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.scrollTo("900");
+        paymentScreen.selectPaymentFrequencyValue();
+        Assert.assertEquals(paymentScreen.getValueFromPaymentFrequencyList(), EXPECTED_PAYMENT_FREQUENCY_VALUE,
+                "Payment Frequency Value is wrong!");
+    }
+
+    @Test(threadPoolSize = 1, invocationCount = 1, timeOut = 25000)
+    public void shouldMakeAllSteps() {
+        PaymentCalculatorScreen paymentScreen = new PaymentCalculatorScreen(driver);
+        paymentScreen.open(LOANS_LIST_ITEM);
+        paymentScreen.scrollTo("300");
+        paymentScreen.movePurchaseSliderToTheRight();
+        paymentScreen.movePurchaseSliverUsingPlusButton();
+        paymentScreen.moveDownSliverUsingPlusButton();
+        paymentScreen.scrollTo("200");
+        paymentScreen.enterValueIntoInterestRateInput(INTEREST_VALUE);
+        paymentScreen.scrollTo("400");
+        paymentScreen.selectAmortizationValue();
+        paymentScreen.selectPaymentFrequencyValue();
+        paymentScreen.pressCalculateButton();
+        paymentScreen.scrollTo("-600");
+        paymentScreen.getValueFromPaymentResults();
+        Assert.assertEquals(paymentScreen.getValueFromPaymentResults(), EXPECTED_PAYMENT_RESULT,
+                "Expected payment is wrong!");
+    }
 }

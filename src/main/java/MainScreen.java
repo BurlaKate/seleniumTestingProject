@@ -12,13 +12,13 @@ public class MainScreen {
     WebDriver driver;
 
     @FindBy(id = "topLangMenuItem")
-    private WebElement languageButton;
+    public WebElement languageButton;
 
     @FindBy(css = "a[data-utag-name='loans']")
-    private WebElement loansButton;
+    public WebElement loansButton;
 
     @FindBy(css = "section[aria-labelledby='Produits']")
-    private WebElement dropDownList;
+    public WebElement dropDownList;
 
     MainScreen(WebDriver driver) {
         this.driver = driver;
