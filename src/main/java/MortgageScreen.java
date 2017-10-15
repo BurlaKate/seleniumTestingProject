@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,7 @@ public class MortgageScreen {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public PaymentCalculatorScreen calculatePaymentButtonPress() {
         ((JavascriptExecutor) driver).executeScript(
                 "arguments[0].scrollIntoView(true);", calculatePaymentsButton);
@@ -23,11 +25,12 @@ public class MortgageScreen {
         return new PaymentCalculatorScreen(driver);
     }
 
+    @Step
     public MortgageScreen open(String productHref) {
-        MainScreen mainScreen = new MainScreen(driver);
-        mainScreen.openPageAndChangeLanguage();
-        mainScreen.openLoansListIfNotOpened();
-        mainScreen.selectProduct(productHref);
+        new MainScreen(driver)
+                .openPageAndChangeLanguage()
+                .openLoansListIfNotOpened()
+                .selectProduct(productHref);
         return this;
     }
 }

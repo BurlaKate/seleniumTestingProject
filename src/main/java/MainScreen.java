@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +26,7 @@ public class MainScreen {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public String getLanguageToSwitchTo() throws StaleElementReferenceException {
         try {
             return languageButton.getAttribute("lang");
@@ -33,6 +35,7 @@ public class MainScreen {
         }
     }
 
+    @Step
     public MainScreen languageButtonPress() {
         try {
             languageButton.click();
@@ -42,6 +45,7 @@ public class MainScreen {
         return this;
     }
 
+    @Step
     public MainScreen openPageAndChangeLanguage() {
         driver.get("http://ia.ca");
         if (getLanguageToSwitchTo().equals(EN_LANGUAGE)) {
@@ -50,6 +54,7 @@ public class MainScreen {
         return this;
     }
 
+    @Step
     public MainScreen openLoansListIfNotOpened() {
         if (!dropDownList.isDisplayed()) {
             loansButton.click();
@@ -57,6 +62,7 @@ public class MainScreen {
         return this;
     }
 
+    @Step
     public MortgageScreen selectProduct(String productHref) {
         openLoansListIfNotOpened();
         driver.findElement(By.cssSelector("ul.mega-menu-content li a[data-utag-name='" + productHref + "']")).click();

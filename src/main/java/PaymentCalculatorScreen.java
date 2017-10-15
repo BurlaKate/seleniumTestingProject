@@ -1,3 +1,4 @@
+import io.qameta.allure.Step;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -64,73 +65,86 @@ public class PaymentCalculatorScreen {
         PageFactory.initElements(driver, this);
     }
 
+    @Step
     public PaymentCalculatorScreen open(String productHref) {
-        MainScreen mainScreen = new MainScreen(driver);
-        mainScreen.openPageAndChangeLanguage();
-        mainScreen.openLoansListIfNotOpened();
-        mainScreen.selectProduct(productHref);
-        MortgageScreen mortgageScreen = new MortgageScreen(driver);
-        mortgageScreen.calculatePaymentButtonPress();
+        new MainScreen(driver)
+                .openPageAndChangeLanguage()
+                .openLoansListIfNotOpened()
+                .selectProduct(productHref);
+        new MortgageScreen(driver)
+                .calculatePaymentButtonPress();
         return this;
     }
 
+    @Step
     public int getLocationOfPurchaseSlider() {
         Point point = purchasePriceSlider.getLocation();
         int xcord = point.getX();
         return xcord;
     }
 
+    @Step
     public PaymentCalculatorScreen movePurchaseSliderToTheRight() {
         new Actions(driver).dragAndDropBy(purchasePriceSlider, PURCHASE_SLIDER_X_OFFSET,
                 PURCHASE_SLIDER_Y_OFFSET).perform();
         return this;
     }
 
+    @Step
     public PaymentCalculatorScreen scrollTo(String yOffsetValue) {
         ((JavascriptExecutor) driver).executeScript(
                 "window.scrollBy(0, " + yOffsetValue + ");");
         return this;
     }
 
+    @Step
     public boolean checkIfPurchaseSliderWorks(int oldLocation, int newLocation) {
         return newLocation - oldLocation >= PURCHASE_SLIDER_X_OFFSET;
     }
 
+    @Step
     public int getValueOfPurchasePrice() {
         return Integer.parseInt(sliderPrixValue.getAttribute(DATA_VALUE_ATTRIBUTE));
     }
 
+    @Step
     public int getValueOfDownPrice() {
         return Integer.parseInt(sliderMiseValue.getAttribute(DATA_VALUE_ATTRIBUTE));
     }
 
+    @Step
     public PaymentCalculatorScreen movePurchaseSliverUsingPlusButton() {
         for (int i = getValueOfPurchasePrice(); i < 500000; i += 250000)
             purchasePricePlusButton.click();
         return this;
     }
 
+    @Step
     public PaymentCalculatorScreen moveDownSliverUsingPlusButton() {
         for (int i = getValueOfDownPrice(); i < 100000; i += 100000)
             downPricePlusButton.click();
         return this;
     }
 
+    @Step
     public String getValueFromInterestRateInput() {
         return interestRateInput.getAttribute(VALUE_ATTRIBUTE);
     }
 
+    @Step
     public PaymentCalculatorScreen enterValueIntoInterestRateInput(String interestValue) {
         interestRateInput.clear();
         interestRateInput.sendKeys(interestValue);
         return this;
     }
 
+    @Step
     public PaymentCalculatorScreen pressCalculateButton() {
         calculateButton.click();
         return this;
     }
 
+    @Step
     public String getValueFromPaymentResults() {
         (new WebDriverWait(driver, 10))
                 .until((WebDriver driver) -> paymentResultsLabel.isDisplayed());
@@ -138,6 +152,7 @@ public class PaymentCalculatorScreen {
         return paymentResultsLabel.getText();
     }
 
+    @Step
     public PaymentCalculatorScreen selectAmortizationValue() {
         amortizationSelect.click();
         if (amortizationSelect.isDisplayed()) {
@@ -146,10 +161,12 @@ public class PaymentCalculatorScreen {
         return this;
     }
 
+    @Step
     public String getValueFromAmortizationList() {
         return amortizationLabel.getText();
     }
 
+    @Step
     public PaymentCalculatorScreen selectPaymentFrequencyValue() {
         paymentFrequencySelect.click();
         if (paymentFrequencySelect.isDisplayed()) {
@@ -158,6 +175,7 @@ public class PaymentCalculatorScreen {
         return this;
     }
 
+    @Step
     public String getValueFromPaymentFrequencyList() {
         return paymentFrequencyLabel.getText();
     }

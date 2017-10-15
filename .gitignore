@@ -2,3 +2,4 @@
 .idea/
 .allure/
 target/
+allure-results/
