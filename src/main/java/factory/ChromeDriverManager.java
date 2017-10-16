@@ -14,7 +14,6 @@ public class ChromeDriverManager extends DriverManager {
 
     private ChromeDriverService chromeDriver;
 
-
     @Override
     protected void startService() {
         if (null == chromeDriver) {
@@ -38,11 +37,12 @@ public class ChromeDriverManager extends DriverManager {
 
     @Override
     protected void createDriver() {
-        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("test-type");
         options.addArguments("start-maximized");
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-        driver = new ChromeDriver(capabilities);
-
+        new ChromeDriver(capabilities);
     }
+
 }

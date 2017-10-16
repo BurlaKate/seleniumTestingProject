@@ -8,11 +8,13 @@ import org.openqa.selenium.WebDriver;
 public abstract class DriverManager {
 
     protected WebDriver driver;
+
     protected abstract void startService();
     protected abstract void stopService();
     protected abstract void createDriver();
 
-    public void quit(){
+    public void quit() {
+        stopService();
         driver.quit();
     }
 
@@ -23,5 +25,6 @@ public abstract class DriverManager {
         }
         return driver;
     }
+
 
 }

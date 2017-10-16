@@ -8,19 +8,17 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainScreen {
 
-    private static final String EN_LANGUAGE = "en";
     public static final String IA_CA_URL = "http://ia.ca";
-
-    WebDriver driver;
+    private static final String EN_LANGUAGE = "en";
 
     @FindBy(id = "topLangMenuItem")
     public WebElement languageButton;
-
     @FindBy(css = "a[data-utag-name='loans']")
     public WebElement loansButton;
-
     @FindBy(css = "section[aria-labelledby='Produits']")
     public WebElement dropDownList;
+
+    private WebDriver driver;
 
     MainScreen(WebDriver driver) {
         this.driver = driver;
