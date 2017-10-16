@@ -11,7 +11,7 @@ public abstract class DriverManager {
 
     protected abstract void startService();
     protected abstract void stopService();
-    protected abstract void createDriver();
+    protected abstract WebDriver createDriver();
 
     public void quit() {
         stopService();
@@ -19,9 +19,9 @@ public abstract class DriverManager {
     }
 
     public WebDriver getDriver() {
-        if (null == driver) {
+        if (this.driver == null) {
             startService();
-            createDriver();
+            this.driver = createDriver();
         }
         return driver;
     }
