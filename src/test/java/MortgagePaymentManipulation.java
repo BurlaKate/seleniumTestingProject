@@ -1,5 +1,6 @@
+import factory.DriverManager;
+import factory.DriverManagerFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,17 +20,19 @@ public class MortgagePaymentManipulation {
     private static final String EXPECTED_PAYMENT_FREQUENCY_VALUE = "weekly";
     private static final String EXPECTED_PAYMENT_RESULT = "$ 726.35";
 
+    DriverManager driverManager;
     private static WebDriver driver;
 
     @BeforeMethod
     public void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driverManager = DriverManagerFactory.getManager(DriverManagerFactory.DriverType.CHROME);
+        driver = driverManager.getDriver();
+//        driver.manage().window().maximize();
     }
 
     @AfterMethod
     public void quit() {
-        driver.quit();
+        driverManager.quit();
     }
 
     @Test

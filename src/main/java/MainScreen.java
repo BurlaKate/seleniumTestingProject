@@ -9,6 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class MainScreen {
 
     private static final String EN_LANGUAGE = "en";
+    public static final String IA_CA_URL = "http://ia.ca";
 
     WebDriver driver;
 
@@ -27,7 +28,7 @@ public class MainScreen {
     }
 
     @Step
-    public String getLanguageToSwitchTo() throws StaleElementReferenceException {
+    public String getLanguageToSwitchTo() {
         try {
             return languageButton.getAttribute("lang");
         } catch (StaleElementReferenceException e) {
@@ -47,7 +48,7 @@ public class MainScreen {
 
     @Step
     public MainScreen openPageAndChangeLanguage() {
-        driver.get("http://ia.ca");
+        driver.get(IA_CA_URL);
         if (getLanguageToSwitchTo().equals(EN_LANGUAGE)) {
             languageButtonPress();
         }

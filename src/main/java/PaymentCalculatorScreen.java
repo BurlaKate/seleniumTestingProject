@@ -1,11 +1,9 @@
 import io.qameta.allure.Step;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -79,8 +77,7 @@ public class PaymentCalculatorScreen {
     @Step
     public int getLocationOfPurchaseSlider() {
         Point point = purchasePriceSlider.getLocation();
-        int xcord = point.getX();
-        return xcord;
+        return point.getX();
     }
 
     @Step
@@ -147,7 +144,7 @@ public class PaymentCalculatorScreen {
     @Step
     public String getValueFromPaymentResults() {
         (new WebDriverWait(driver, 10))
-                .until((WebDriver driver) -> paymentResultsLabel.isDisplayed());
+                .until((ExpectedConditions.presenceOfElementLocated(By.id("paiement-resultats"))));
         Assert.assertTrue(paymentResultsLabel.isDisplayed());
         return paymentResultsLabel.getText();
     }
