@@ -26,6 +26,7 @@ public class MortgagePaymentManipulation {
     @BeforeMethod
     public void setup() {
         driverManager = DriverManagerFactory.getManager(DriverManagerFactory.DriverType.CHROME);
+//        driverManager = DriverManagerFactory.getManager(DriverManagerFactory.DriverType.FIREFOX);
         driver = driverManager.getDriver();
     }
 

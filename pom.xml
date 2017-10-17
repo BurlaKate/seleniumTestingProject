@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
             <version>3.4.0</version>
         </dependency>
@@ -59,6 +64,7 @@
             <artifactId>selenium-server</artifactId>
             <version>3.4.0</version>
         </dependency>
+
     </dependencies>
 
 
@@ -81,7 +87,6 @@
                 <configuration>
                     <suiteXmlFiles>
                         <xmlFile>src/test/resources/testng.xml</xmlFile>
-                        <!--<xmlFile>src/test/resources/methods-test-testng.xml</xmlFile>-->
                     </suiteXmlFiles>
                     <testFailureIgnore>true</testFailureIgnore>
                     <argLine>

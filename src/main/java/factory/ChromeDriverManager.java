@@ -36,6 +36,8 @@ public class ChromeDriverManager extends DriverManager {
         options.addArguments("test-type");
         options.addArguments("start-maximized");
         DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability("browserName", "chrome");
+        capabilities.setCapability("platformName", "Windows");
         capabilities.setCapability(ChromeOptions.CAPABILITY, options);
         return new ChromeDriver(capabilities);
     }
