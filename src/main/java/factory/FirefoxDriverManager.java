@@ -16,8 +16,4 @@ public class FirefoxDriverManager extends DriverManager {
     protected void startService() {
     }
 
-    @Override
-    protected void stopService() {
-
-    }
 }

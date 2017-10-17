@@ -144,7 +144,7 @@ public class PaymentCalculatorScreen {
     @Step
     public String getValueFromPaymentResults() {
         (new WebDriverWait(driver, 10))
-                .until((ExpectedConditions.presenceOfElementLocated(By.id("paiement-resultats"))));
+                .until((WebDriver webDriver) -> paymentResultsLabel.isDisplayed());
         Assert.assertTrue(paymentResultsLabel.isDisplayed());
         return paymentResultsLabel.getText();
     }

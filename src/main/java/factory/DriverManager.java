@@ -10,11 +10,9 @@ public abstract class DriverManager {
     protected WebDriver driver;
 
     protected abstract void startService();
-    protected abstract void stopService();
     protected abstract WebDriver createDriver();
 
     public void quit() {
-        stopService();
         driver.quit();
     }
 

@@ -20,7 +20,7 @@ public class ChromeDriverManager extends DriverManager {
         if (chromeDriver == null) {
             try {
                 chromeDriver = new ChromeDriverService.Builder()
-                        .usingDriverExecutable(new File("D:/work/SeleniumTestProjectIA/seleniumTestProjectIA/webdrivers/", "chromedriver.exe"))
+                        .usingDriverExecutable(new File("src/test/resources/webdrivers/", "chromedriver.exe"))
                         .usingAnyFreePort()
                         .build();
                 chromeDriver.start();
@@ -28,12 +28,6 @@ public class ChromeDriverManager extends DriverManager {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Override
-    protected void stopService() {
-        if (chromeDriver.isRunning())
-            chromeDriver.stop();
     }
 
     @Override
