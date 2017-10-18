@@ -35,7 +35,6 @@ public class FirefoxDriverManager extends DriverManager {
     protected WebDriver createDriver() {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("test-type");
-        options.addArguments("start-maximized");
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("browserName", "firefox");
         capabilities.setCapability("platformName", "Windows");

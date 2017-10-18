@@ -28,6 +28,7 @@ public class MortgagePaymentManipulation {
         driverManager = DriverManagerFactory.getManager(DriverManagerFactory.DriverType.CHROME);
 //        driverManager = DriverManagerFactory.getManager(DriverManagerFactory.DriverType.FIREFOX);
         driver = driverManager.getDriver();
+        driver.manage().window().fullscreen();
     }
 
     @AfterMethod
