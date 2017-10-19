@@ -5,24 +5,14 @@ import org.openqa.selenium.WebDriver;
 /**
  * Created by Katherine on 15.10.2017.
  */
-public abstract class DriverManager {
+public interface DriverManager {
 
-    protected WebDriver driver;
+    WebDriver driver = null;
 
-    protected abstract void startService();
-    protected abstract WebDriver createDriver();
+    void startService();
 
-    public void quit() {
-        driver.quit();
-    }
+    WebDriver getDriver();
 
-    public WebDriver getDriver() {
-        if (this.driver == null) {
-            startService();
-            this.driver = createDriver();
-        }
-        return driver;
-    }
-
+    WebDriver createDriver();
 
 }

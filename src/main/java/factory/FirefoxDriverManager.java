@@ -11,13 +11,13 @@ import java.io.File;
 /**
  * Created by Katherine on 15.10.2017.
  */
-public class FirefoxDriverManager extends DriverManager {
+public class FirefoxDriverManager implements DriverManager {
 
     private GeckoDriverService firefoxDriver;
-
+    private WebDriver driver;
 
     @Override
-    protected void startService() {
+    public void startService() {
         if (firefoxDriver == null) {
             try {
                 firefoxDriver = new GeckoDriverService.Builder()
@@ -32,9 +32,19 @@ public class FirefoxDriverManager extends DriverManager {
     }
 
     @Override
-    protected WebDriver createDriver() {
+    public WebDriver getDriver() {
+        if (driver == null) {
+            startService();
+            this.driver = createDriver();
+        }
+        return driver;
+    }
+
+    @Override
+    public WebDriver createDriver() {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("test-type");
+        options.addArguments("start-maximized");
         DesiredCapabilities capabilities = DesiredCapabilities.firefox();
         capabilities.setCapability("browserName", "firefox");
         capabilities.setCapability("platformName", "Windows");
