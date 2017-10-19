@@ -7,8 +7,6 @@ import org.openqa.selenium.WebDriver;
  */
 public interface DriverManager {
 
-    WebDriver driver = null;
-
     void startService();
 
     WebDriver getDriver();
